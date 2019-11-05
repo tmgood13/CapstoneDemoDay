@@ -59,6 +59,8 @@ export class RequestDetailComponent implements OnInit {
   }
   
   updateline(requestline: RequestLine): void {
+    this.request.rejectionReason = null;
+    this.request.status = "REVIEW";
     this.requestlinesvc.change(requestline).subscribe(
       res => { console.log("Response from requestline edit", res);
       this.refresh();
@@ -68,6 +70,8 @@ export class RequestDetailComponent implements OnInit {
   }
   
   deleteline(requestline: RequestLine): void {
+    this.request.rejectionReason = null;
+    this.request.status = "REVIEW";
     this.requestlinesvc.remove(requestline).subscribe(
       res => { console.log("Response from requestline delete", res);
       this.refresh();
@@ -77,6 +81,8 @@ export class RequestDetailComponent implements OnInit {
   }
 
   save(): void {
+    this.request.rejectionReason = null;
+    this.request.status = "REVIEW";
     this.requestsvc.change(this.request).subscribe(
       res => { console.log("Response from request save", res);
       this.router.navigateByUrl('/requests/list') 

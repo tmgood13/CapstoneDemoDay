@@ -17,12 +17,12 @@
           <tr> 
             <td (click)="showtbl(request.id)">{{request.id}} 
               <span *ngIf="idx != request.id" style="color:rgb(13, 93, 185)">▼</span>
-              <span *ngIf="showtable && idx == request.id" style="color:rgb(39, 212, 255)">▲</span>
+              <span *ngIf="showtable && idx == request.id" style="color:rgb(34, 196, 236)">▲</span>
             </td>
             <td>{{request.status}}<br>
 
               <ng-container *ngIf="showtable && idx == request.id">
-                <table class="table table-sm" >
+                <table class="table table-sm">
                   <thead class="tableheader">
                     <th>Item</th>
                     <th>Qty</th>
@@ -48,9 +48,9 @@
 
                   <button (click)="showrej()" class="btn btn-danger btn-sm"
                   [disabled]="!this.systemsvc.user.isReviewer && !this.systemsvc.user.isAdmin"
-                  >Reject</button> | 
+                  >Reject</button>
 
-                  <span *ngIf="showreject">
+                  <span *ngIf="showreject"> | 
                   <input id="rejectbox" type="string" [(ngModel)]="request.rejectionReason" placeholder="Supply rejection reason">
                   <span>&nbsp;&nbsp;</span>  
                   <button (click)="deny(request)" class="btn btn-danger btn-sm">Confirm</button>

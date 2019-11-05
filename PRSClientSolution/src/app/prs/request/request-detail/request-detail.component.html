@@ -27,7 +27,7 @@
     </table>
 </div>
 <div *ngIf="request">
-  <table class="table table.sm">
+  <table class="table table.sm" style="table-layout: fixed;">
     <tr class="tableheader">
       <td>Product</td>
       <td>Quantity</td>
@@ -37,22 +37,22 @@
     </tr>
     <tr *ngFor="let requestline of request.requestLines">      
       <td>
-        <select [disabled]="denied" [(ngModel)]="requestline.productId" type="number">              
+        <select [(ngModel)]="requestline.productId" type="number">              
           <option *ngFor="let product of products" [ngValue]="product.id">
             {{product.id}} | {{product.name}}
           </option>
         </select>            
       </td>
       <td>
-        <input [disabled]="denied" [(ngModel)]="requestline.quantity" 
+        <input [(ngModel)]="requestline.quantity" 
         type="number" oninput="this.value = Math.abs(this.value)">
       </td>
       <td>{{requestline.product.price | currency}}</td>
       <td>{{requestline.product.price * requestline.quantity | currency}}</td>
       <td>
         <span class="actiondetail">
-          <button [disabled]="denied" (click)="updateline(requestline)" class="btn btn-primary btn-sm">Update</button> | 
-          <button [disabled]="denied" (click)="deleteline(requestline)" class="btn btn-danger btn-sm">Delete</button>
+          <button (click)="updateline(requestline)" class="btn btn-primary btn-sm">Update</button> | 
+          <button (click)="deleteline(requestline)" class="btn btn-danger btn-sm">Delete</button>
         </span>
       </td>
     </tr>
@@ -61,7 +61,7 @@
     <p>
       <span class="tableheader">Total: </span><span>{{request.total | currency}}</span>
     </p>
-    <button [disabled]="denied" class="btn btn-primary btn-sm" (click)="addLine(request)" style="color:white">Add Line</button> | 
-    <button [disabled]="denied" (click)="save()" class="btn btn-success btn-sm">Submit Request</button>
+    <button class="btn btn-primary btn-sm" (click)="addLine(request)" style="color:white">New Line</button> | 
+    <button (click)="save()" class="btn btn-success btn-sm">Submit Request</button>
   </div>
 </div>

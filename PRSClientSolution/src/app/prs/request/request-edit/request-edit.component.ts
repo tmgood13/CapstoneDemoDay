@@ -36,6 +36,8 @@ export class RequestEditComponent implements OnInit {
     ) { }
 
   save(): void {
+    this.request.rejectionReason = null;
+    this.request.status = "REVIEW";
     this.requestsvc.change(this.request).subscribe(
       res => { console.log("Response from request edit", res);
       this.router.navigateByUrl('/requests/list') 
