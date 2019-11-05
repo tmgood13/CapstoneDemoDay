@@ -17,7 +17,8 @@
         <td><a (click)="sortBy('city')">City</a></td>
         <td>Actions</td>
       </tr>
-      <tr *ngFor="let vendor of vendors | searchVendors:searchCriteria | sort:sortCriteria:sortOrder ">
+      <tr *ngFor="let vendor of vendors | searchVendors:searchCriteria | sort:sortCriteria:sortOrder"
+          [hidden]="vendor.id == 23">
         <td>{{vendor.id}}</td>
         <td>{{vendor.code}}</td>
         <td>{{vendor.name}}</td>

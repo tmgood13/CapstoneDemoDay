@@ -48,7 +48,6 @@ import { SearchReviewPipe } from './core/pipes/search-review.pipe'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatSliderModule } from '@angular/material/slider';
-import { TabletestComponent } from './core/logger/tabletest/tabletest.component';
 import { AboutComponent } from './core/about/about.component';
 
 
@@ -87,7 +86,6 @@ import { AboutComponent } from './core/about/about.component';
     SearchRequestPipe,
     HomeComponent,
     RequestReviewComponent,
-    TabletestComponent,
     SearchReviewPipe,
     AboutComponent,
   ],

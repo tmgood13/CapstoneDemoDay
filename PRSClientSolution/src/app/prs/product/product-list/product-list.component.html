@@ -19,7 +19,8 @@
         <td><a (click)="sortBy('partNbr')">Part Number</a></td>
         <td>Actions</td>
       </tr>
-      <tr *ngFor="let product of products | searchProducts:searchCriteria | sort:sortCriteria:sortOrder ">
+      <tr *ngFor="let product of products | searchProducts:searchCriteria | sort:sortCriteria:sortOrder"
+          [hidden]="product.id == 126">
         <td>{{product.id}}</td>
         <td>{{product.name}}</td>
         <td>{{product.vendor.code}}</td>
