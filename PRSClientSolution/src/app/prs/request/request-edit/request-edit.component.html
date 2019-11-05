@@ -1,0 +1,58 @@
+<app-menu></app-menu>
+<div class="component" *ngIf="request">
+    <div class="header">      
+      <span class="pagetitle">Request Edit</span> | 
+      <span class="createlink">
+        <a routerLink="/requests/detail/{{request.id}}">Lines</a> | 
+      </span>
+      <span class="createlink">
+        <a routerLink="/requests/list">Back to request list</a>
+      </span>
+    </div>
+  <table class="table table.sm">
+    <tr>
+      <td>Id:</td>
+      <td [attr.colspan]="2">{{request.id}}</td>
+    </tr>
+    <tr *ngIf="request.rejectionReason" style="color: rgb(207, 0, 0);">
+      <td >Rejection Reason:</td>
+      <td [attr.colspan]="2">{{request.rejectionReason}}</td>
+    </tr>
+    <tr hidden>
+      <td>User Id:</td>
+      <td>{{request.userId}}</td>
+      <td><input [(ngModel)]="request.userId" type="number" disabled></td>
+    </tr>
+    <tr>
+      <td>Description:</td>
+      <td>{{request.description}}</td>
+      <td><input [(ngModel)]="request.description" type="string" [disabled]="denied"></td>
+    </tr>
+    <tr>
+      <td>Justification:</td>
+      <td>{{request.justification}}</td>
+      <td><input [(ngModel)]="request.justification" type="string" [disabled]="denied"></td>
+    </tr>
+    <tr>
+      <td>Delivery Mode:</td>
+      <td>{{request.deliveryMode}}</td>
+      <td><input [(ngModel)]="request.deliveryMode" type="string" [disabled]="denied"></td>
+    </tr>
+    <tr hidden>
+      <td>Status:</td>
+      <td>{{request.status}}</td>
+      <td><input [(ngModel)]="request.status" type="string"></td>
+    </tr>
+    <tr>
+      <td>Total:</td>
+      <td [attr.colspan]="2">{{request.total | currency}}</td>
+    </tr>
+  </table>
+  <div>
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>       
+    <button [disabled]="denied" (click)="save()" class="btn btn-primary btn-sm">Save</button>
+    <span>&nbsp;&nbsp; | &nbsp;&nbsp;</span>       
+    <button (click)="delete()" [disabled]="verifyDelete" class="btn btn-danger btn-sm">Delete Request</button>
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>       
+    <input id="confirmdel" type="checkbox" (click)="verify()"> Confirm delete
+  </div>

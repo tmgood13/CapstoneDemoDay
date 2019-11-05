@@ -1,0 +1,67 @@
+<app-menu></app-menu>
+<div class="component">
+  <div class="header">
+    <span class="pagetitle">Request Review</span>
+    <input class="search" [(ngModel)]="searchCriteria" type="text" placeholder="Search">
+  </div>
+    
+    <table class="table table-hover table-sm table-responsive-xl">
+      <tr class="tableheader">
+        <td><a (click)="sortBy('id')">Id</a></td>
+        <td><a (click)="sortBy('status')">Status</a></td>
+        <td><a (click)="sortBy('user.username')">User</a></td>
+        <td>Description</td>
+        <td><a (click)="sortBy('total')">Total</a></td>
+      </tr>
+        <ng-container *ngFor="let request of requests | searchRequests:searchCriteria | sort:sortCriteria:sortOrder" >          
+          <tr> 
+            <td (click)="showtbl(request.id)">{{request.id}} 
+              <span *ngIf="idx != request.id" style="color:rgb(13, 93, 185)">▼</span>
+              <span *ngIf="showtable && idx == request.id" style="color:rgb(39, 212, 255)">▲</span>
+            </td>
+            <td>{{request.status}}<br>
+
+              <ng-container *ngIf="showtable && idx == request.id">
+                <table class="table table-sm" >
+                  <thead class="tableheader">
+                    <th>Item</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                  </thead>   
+                  <tbody>                  
+                    <tr *ngFor="let requestline of request.requestLines">
+                      <td>{{requestline.product.name}}</td>
+                      <td>{{requestline.quantity}}</td>
+                      <td>{{requestline.product.price | currency}}</td>
+                      <td>{{requestline.product.price * requestline.quantity | currency}}</td>
+                    </tr>                    
+                  </tbody>             
+                </table>
+              </ng-container>
+
+              <ng-container *ngIf="showtable && idx == request.id">
+
+                  <button (click)="approve(request)" class="btn btn-success btn-sm"
+                  [disabled]="!this.systemsvc.user.isReviewer && !this.systemsvc.user.isAdmin"
+                  >Approve</button> | 
+
+                  <button (click)="showrej()" class="btn btn-danger btn-sm"
+                  [disabled]="!this.systemsvc.user.isReviewer && !this.systemsvc.user.isAdmin"
+                  >Reject</button> | 
+
+                  <span *ngIf="showreject">
+                  <input id="rejectbox" type="string" [(ngModel)]="request.rejectionReason" placeholder="Supply rejection reason">
+                  <span>&nbsp;&nbsp;</span>  
+                  <button (click)="deny(request)" class="btn btn-danger btn-sm">Confirm</button>
+                </span>
+              </ng-container>
+
+            </td>
+            <td>{{request.user.username}}</td>
+            <td>{{request.description}}</td>
+            <td>{{request.total | currency}}</td>
+          </tr>
+        </ng-container>
+    </table>
+</div>

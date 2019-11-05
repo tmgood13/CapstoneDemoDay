@@ -1,0 +1,42 @@
+<app-menu></app-menu>
+<div class="component" *ngIf="user">
+  <div class="header">      
+    <span class="pagetitle">User Detail</span>
+    <span class="actiondetail" [hidden]="!this.systemsvc.user.isAdmin && this.systemsvc.user.id != this.user.id"> | 
+      <a routerLink="/users/edit/{{user.id}}">Edit</a>
+    </span> |
+    <span class="createlink">
+      <a routerLink="/users/list">Back to user list</a>
+    </span>
+  </div>
+    <table class="table table.sm">
+      <tr>
+        <td>Id:</td>
+        <td>{{user.id}}</td>
+      </tr>
+      <tr>
+        <td>Username:</td>
+        <td>{{user.username}}</td>
+      </tr>
+      <tr>
+        <td>Name:</td>
+        <td>{{user.firstname}} {{user.lastname}}</td>
+      </tr>
+      <tr>
+        <td>Phone:</td>
+        <td>{{user.phone}}</td>
+      </tr>
+      <tr>
+        <td>Email:</td>
+        <td>{{user.email}}</td>
+      </tr>
+      <tr>
+        <td>Reviewer:</td>
+        <td>{{user.isReviewer | bool}}</td>
+      </tr>
+      <tr>
+        <td>Admin:</td>
+        <td>{{user.isAdmin | bool}}</td>
+      </tr>
+    </table>
+</div>

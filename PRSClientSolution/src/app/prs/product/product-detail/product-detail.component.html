@@ -1,0 +1,42 @@
+<app-menu></app-menu>
+<div class="component" *ngIf="product">
+    <div class="header">      
+      <span class="pagetitle">Product Detail</span>
+      <span class="actiondetail"  [hidden]="!this.systemsvc.user.isAdmin"> | 
+        <a routerLink="/products/edit/{{product.id}}">Edit</a>
+      </span> |
+      <span class="createlink">
+        <a routerLink="/products/list">Back to product list</a>
+      </span>
+    </div>
+    <table class="table table.sm">
+        <tr>
+          <td>Id:</td>
+          <td>{{product.id}}</td>
+        </tr>
+        <tr>
+          <td>Part Nbr:</td>
+          <td>{{product.partNbr}}</td>
+        </tr>
+        <tr>
+          <td>Name:</td>
+          <td>{{product.name}}</td>
+        </tr>
+        <tr>
+          <td>Price:</td>
+          <td>{{product.price}}</td>
+        </tr>
+        <tr>
+          <td>Unit:</td>
+          <td>{{product.unit}}</td>
+        </tr>
+        <tr>
+          <td>Photopath:</td>
+          <td>{{product.photoPath}}</td>
+        </tr>
+        <tr>
+          <td>Vendor:</td>
+          <td>{{product.vendorId}} | {{product.vendor.code}} | {{product.vendor.name}}</td>
+        </tr>
+      </table>
+  </div>

@@ -1,0 +1,67 @@
+<app-menu></app-menu>
+<div class="component" *ngIf="request">
+    <div class="header">      
+      <span class="pagetitle">Lines</span> | 
+      <span class="actiondetail">
+        <a routerLink="/requests/edit/{{request.id}}">Other</a>
+      </span> |
+      <span class="createlink">
+        <a routerLink="/requests/list">Back to request list</a>
+      </span>
+    </div>
+    <table class="table table.sm">
+      <tr class="tableheader">
+        <td>Id</td>
+        <td>Description</td>
+        <td>Status</td>
+        <td>Total</td>
+        <td>User</td>
+      </tr>
+      <tr>
+        <td>{{request.id}}</td>
+        <td>{{request.description}}</td>
+        <td>{{request.status}}</td>
+        <td>{{request.total | currency}}</td>
+        <td>{{request.user.username}}</td>
+      </tr>
+    </table>
+</div>
+<div *ngIf="request">
+  <table class="table table.sm">
+    <tr class="tableheader">
+      <td>Product</td>
+      <td>Quantity</td>
+      <td>Price</td>
+      <td>Subtotal</td>
+      <td>Actions</td>
+    </tr>
+    <tr *ngFor="let requestline of request.requestLines">      
+      <td>
+        <select [disabled]="denied" [(ngModel)]="requestline.productId" type="number">              
+          <option *ngFor="let product of products" [ngValue]="product.id">
+            {{product.id}} | {{product.name}}
+          </option>
+        </select>            
+      </td>
+      <td>
+        <input [disabled]="denied" [(ngModel)]="requestline.quantity" 
+        type="number" oninput="this.value = Math.abs(this.value)">
+      </td>
+      <td>{{requestline.product.price | currency}}</td>
+      <td>{{requestline.product.price * requestline.quantity | currency}}</td>
+      <td>
+        <span class="actiondetail">
+          <button [disabled]="denied" (click)="updateline(requestline)" class="btn btn-primary btn-sm">Update</button> | 
+          <button [disabled]="denied" (click)="deleteline(requestline)" class="btn btn-danger btn-sm">Delete</button>
+        </span>
+      </td>
+    </tr>
+  </table>
+  <div> 
+    <p>
+      <span class="tableheader">Total: </span><span>{{request.total | currency}}</span>
+    </p>
+    <button [disabled]="denied" class="btn btn-primary btn-sm" (click)="addLine(request)" style="color:white">Add Line</button> | 
+    <button [disabled]="denied" (click)="save()" class="btn btn-success btn-sm">Submit Request</button>
+  </div>
+</div>

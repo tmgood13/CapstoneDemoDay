@@ -1,0 +1,55 @@
+<app-menu></app-menu>
+<div class="component">
+    <div class="header">      
+      <span class="pagetitle">Vendor Create</span> | 
+      <span class="createlink">
+        <a routerLink="/vendors/list">Back to vendor list</a>
+      </span>
+    </div>
+
+  <table class="table table.sm">
+    <tr>
+      <td>Id:</td>
+      <td><input [(ngModel)]="vendor.id" type="number" disabled></td>
+    </tr>
+    <tr>
+      <td>Code:</td>
+      <td><input [(ngModel)]="vendor.code" type="string"></td>
+    </tr>
+    <tr>
+      <td>Name:</td>
+      <td><input [(ngModel)]="vendor.name" type="string"></td>
+    </tr>
+    <tr>
+      <td>Address:</td>
+      <td><input [(ngModel)]="vendor.address" type="string"></td>
+    </tr>
+    <tr>
+      <td>City:</td>
+      <td><input [(ngModel)]="vendor.city" type="string"></td>
+    </tr>
+    <tr>
+      <td>State:</td>
+      <td><input [(ngModel)]="vendor.state" type="string" placeholder="XX" minlength="2" maxlength="2"></td>
+    </tr>
+    <tr>
+      <td>Zip:</td>
+      <td><input [(ngModel)]="vendor.zip" type="string" placeholder="xxxxx" maxlength="5" minlength="5"></td>
+    </tr>
+    <tr>
+      <td>Phone:</td>
+      <td>
+        <span>
+          <input [(ngModel)]="phone1" type="string" size="3" minlength="3" maxlength="3"> - 
+          <input [(ngModel)]="phone2" type="string" size="3" minlength="3" maxlength="3"> - 
+          <input [(ngModel)]="phone3" type="string" size="4" minlength="3" maxlength="4">
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>Email:</td>
+      <td><input [(ngModel)]="vendor.email" type="string"></td>
+    </tr>
+  </table>
+  <button (click)="save()" class="btn btn-primary btn-sm">Save</button>
+</div>

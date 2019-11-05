@@ -1,0 +1,37 @@
+<app-menu></app-menu>
+<div class="component">
+  <div class="header">
+    <span class="pagetitle">Request List</span> | 
+    <span class="createlink">
+      <a routerLink="/requests/create">Create</a>
+    </span>
+    <input class="search" [(ngModel)]="searchCriteria" type="text" placeholder="Search">
+  </div>
+  <div>    
+    <table class="table table.sm">
+      <tr class="tableheader">
+        <td><a (click)="sortBy('id')">Id</a></td>
+        <td><a (click)="sortBy('status')">Status</a></td>
+        <td><a (click)="sortBy('user.username')">User</a></td>
+        <td><a (click)="sortBy('description')">Description</a></td>
+        <td><a (click)="sortBy('justification')">Justification</a></td>
+        <td><a (click)="sortBy('total')">Total</a></td>
+        <td>Modify</td>
+      </tr>
+      <tr *ngFor="let request of requests | searchRequests:searchCriteria | sort:sortCriteria:sortOrder">
+        <td>{{request.id}}</td>
+        <td>{{request.status}}</td>
+        <td>{{request.user.username}}</td>
+        <td>{{request.description}}</td>
+        <td>{{request.justification}}</td>
+        <td>{{request.total | currency}}</td>
+        <td>
+          <span class="actiondetail">
+            <a routerLink="/requests/detail/{{request.id}}">Lines</a> |
+            <a routerLink="/requests/edit/{{request.id}}">Other</a>
+          </span>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+<app-menu></app-menu>
+<div class="component" *ngIf="user">
+    <div class="header">      
+      <span class="pagetitle">User Edit</span> | 
+      <span class="createlink">
+        <a routerLink="/users/list">Back to user list</a>
+      </span>
+    </div>
+  <table class="table table.sm">
+    <tr>
+      <td>Id:</td>
+      <td [attr.colspan]="2">{{user.id}}</td>
+    </tr>
+    <tr>
+      <td>Username:</td>
+      <td>{{user.username}}</td>
+      <td hidden><input [(ngModel)]="user.username" type="string" disabled></td>
+    </tr>
+    <tr>
+      <td>Password:</td>
+      <td></td>
+      <td>
+        <input id="passfield" [(ngModel)]="user.password" type="password"> 
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>       
+        <input type="checkbox" (click)="viewpass()"> Show password
+      </td>
+    </tr>
+    <tr>
+      <td>First name:</td>
+      <td>{{user.firstname}}</td>
+      <td><input [(ngModel)]="user.firstname" type="string"></td>
+    </tr>
+    <tr>
+      <td>Last name:</td>
+      <td>{{user.lastname}}</td>
+      <td><input [(ngModel)]="user.lastname" type="string"></td>
+    </tr>
+    <tr>
+      <td>Phone:</td>
+      <td>{{user.phone}}</td>
+      <td>
+        <span>
+          <input [(ngModel)]="phone1" type="string" size="3" minlength="3" maxlength="3"> - 
+          <input [(ngModel)]="phone2" type="string" size="3" minlength="3" maxlength="3"> - 
+          <input [(ngModel)]="phone3" type="string" size="4" minlength="3" maxlength="4">
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>Email:</td>
+      <td>{{user.email}}</td>
+      <td><input [(ngModel)]="user.email" type="string"></td>
+    </tr>
+    <tr>
+      <td>Reviewer:</td>
+      <td>{{user.isReviewer | bool}}</td>
+      <td><input [(ngModel)]="user.isReviewer" type="checkbox" [disabled]="this.systemsvc.user.isAdmin == false"></td>
+    </tr>
+    <tr>
+      <td>Admin:</td>
+      <td>{{user.isAdmin | bool}}</td>
+      <td><input [(ngModel)]="user.isAdmin" type="checkbox" [disabled]="this.systemsvc.user.isAdmin == false"></td>
+    </tr>
+  </table>
+  <div>
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>       
+    <button (click)="save()" class="btn btn-primary btn-sm">Save</button>
+    <span>&nbsp;&nbsp; | &nbsp;&nbsp;</span>       
+    <button (click)="delete()" [disabled]="verifyDelete" class="btn btn-danger btn-sm">Delete</button>
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>       
+    <input id="confirmdel" type="checkbox" (click)="verify()"> Confirm delete
+  </div>
+</div>

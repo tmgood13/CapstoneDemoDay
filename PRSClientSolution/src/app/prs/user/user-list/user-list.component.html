@@ -1,0 +1,37 @@
+<app-menu></app-menu>
+<div class="component">
+  <div class="header">
+    <span class="pagetitle">User List</span>
+    <span class="createlink" [hidden]="!this.systemsvc.user.isAdmin"> | 
+      <a routerLink="/users/create">Create</a>
+    </span>
+    <input class="search" [(ngModel)]="searchCriteria" type="text" placeholder="Search">
+  </div>
+  <div>    
+    <table class="table table.sm">
+      <tr class="tableheader">
+        <td><a (click)="sortBy('id')">Id</a></td>
+        <td><a (click)="sortBy('username')">Username</a></td>
+        <td><a (click)="sortBy('lastname')">Full Name</a></td>
+        <td><a (click)="sortBy('isReviewer')">Reviewer</a></td>
+        <td><a (click)="sortBy('isAdmin')">Admin</a></td>
+        <td>Actions</td>
+      </tr>
+      <tr *ngFor="let user of users | searchUsers:searchCriteria | sort:sortCriteria:sortOrder" >
+        <td>{{user.id}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.firstname}} {{user.lastname}}</td>
+        <td>{{user.isReviewer | bool}}</td>
+        <td>{{user.isAdmin | bool}}</td>
+        <td>
+          <span class="actiondetail">
+            <a routerLink="/users/detail/{{user.id}}">Details</a>
+            <span [hidden]="!this.systemsvc.user.isAdmin && this.systemsvc.user.id != user.id"> | 
+              <a routerLink="/users/edit/{{user.id}}">Edit</a>
+            </span>
+          </span>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

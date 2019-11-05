@@ -1,0 +1,12 @@
+li {
+    display: inline-block;
+    text-align: center;
+}
+a {
+    text-decoration: none;
+    color: rgb(204, 203, 203);
+    padding: 0 15px;
+}
+a:hover {
+    color:whitesmoke;
+}

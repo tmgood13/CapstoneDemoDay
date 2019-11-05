@@ -1,0 +1,59 @@
+<app-menu></app-menu>
+<div class="component" *ngIf="product">
+    <div class="header">      
+      <span class="pagetitle">Product Edit</span> | 
+      <span class="createlink">
+        <a routerLink="/products/list">Back to product list</a>
+      </span>
+    </div>
+  <table class="table table.sm">
+    <tr>
+      <td>Id:</td>
+      <td [attr.colspan]="2">{{product.id}}</td>
+    </tr>
+    <tr>
+      <td>Part Nbr:</td>
+      <td>{{product.partNbr}}</td>
+      <td hidden><input [(ngModel)]="product.partNbr" type="string" disabled></td>
+    </tr>
+    <tr>
+      <td>Name:</td>
+      <td>{{product.name}}</td>
+      <td><input [(ngModel)]="product.name" type="string"></td>
+    </tr>
+    <tr>
+      <td>Price:</td>
+      <td>{{product.price}}</td>
+      <td><input [(ngModel)]="product.price" type="number"></td>
+    </tr>
+    <tr>
+      <td>Unit:</td>
+      <td>{{product.unit}}</td>
+      <td><input [(ngModel)]="product.unit" type="string"></td>
+    </tr>
+    <tr>
+      <td>Photopath:</td>
+      <td>{{product.photoPath}}</td>
+      <td><input [(ngModel)]="product.photoPath" type="string"></td>
+    </tr>
+    <tr>
+      <td>Vendor:</td>
+      <td>{{product.vendor.id}} | {{product.vendor.name}}</td>
+      <td>
+        <select [(ngModel)]="product.vendorId" type="number">              
+          <option *ngFor="let vendor of vendors" [ngValue]="vendor.id">
+            {{vendor.id}} | {{vendor.name}}
+          </option>
+        </select>            
+      </td>
+    </tr>
+  </table>
+  <div>
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>       
+    <button (click)="save()" class="btn btn-primary btn-sm">Save</button>
+    <span>&nbsp;&nbsp; | &nbsp;&nbsp;</span>       
+    <button (click)="delete()" [disabled]="verifyDelete" class="btn btn-danger btn-sm">Delete</button>
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>       
+    <input id="confirmdel" type="checkbox" (click)="verify()"> Confirm delete
+  </div>
+</div>

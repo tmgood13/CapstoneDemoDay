@@ -1,0 +1,19 @@
+<nav *ngIf="admrev">
+  <ul>
+    <app-menuitem *ngFor="let menu of menus" [menu]="menu"></app-menuitem>
+    <span style="color:yellow; float: right;" >[{{loggeduser}}]</span>
+  </ul>
+</nav>
+
+<nav *ngIf="loggedin && !admrev">
+  <ul>
+    <app-menuitem *ngFor="let menu of menunorm" [menu]="menu"></app-menuitem>
+    <span style="color:yellow; float: right;" >[{{loggeduser}}]</span>
+  </ul>
+</nav>
+
+<nav *ngIf="!loggedin">
+  <ul>
+    <app-menuitem *ngFor="let menu of menusmall" [menu]="menu"></app-menuitem>
+  </ul>
+</nav>
